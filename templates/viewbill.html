@@ -1,0 +1,75 @@
+{% extends "layouts.html" %}
+{% block content %}
+
+<div class="search-table mx-4 ">
+  {% for mess in get_flashed_messages()  %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{mess}}
+        </div>
+      {% endfor %}
+{% if message  %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{message}}
+        </div>
+      {% endif %}
+<!--    <input type="text" class="search rounded mt-3 p-2" placeholder="Search..">-->
+<!--  <input type="text" class="st-default-search-input" style="width: 300px; height: 150px" />-->
+      <button class="btn btn-secondary" style=" background-color:#1B62D3;" type="button">
+        <i class="fa fa-search"></i>
+      </button>
+<!--  <button type="button" class="btn btn-primary btn-ls mr-5 text-right" >Add New Product</button>-->
+<a href="/createinvoice/{{id}}" type="button" class="btn btn-primary btn-ls mr-5 text-right" >Create New Bill</a>
+
+</div>
+<!--<div class="text-right mr-4">-->
+<!--    </div>-->
+<br>
+<h3>Customer Name: {{customerr}}</h3>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+<!--             <th scope="col">Customer Name</th>-->
+                          <th scope="col">Product Name</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Quantity</th>
+                          <th scope="col">Total</th>
+        </tr>
+      </thead>
+
+  <tbody>
+                    <tr>
+                        {% for customer in view_bill%}
+
+                        <td> {{ customer.item_name }}</td>
+                         <td>{{ customer.item_price }}</td>
+                         <td>{{ customer.item_quantity }}</td>
+                         <td>{{ customer.total_amount }}</td>
+                      </tr>
+
+                      {% else %}
+
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                        Nothing to Show here!!! Click on Create New Bill to create new bill<a href="{{ url_for('createbill') }}" class="btn stretched-link">Click here</a>
+                     </div>
+
+                      {% endfor %}
+
+  </tbody>
+</table>
+                    {% if view_bill %}
+                     <h3>Total amount is {{totalamt}}</h3>
+                        <a href="/billing/{{id}}"><button class="btn btn-primary btn-sm" onclick="return confirm('Are you sure you want to save bill for this Customer')">Save Bill</button></a>
+
+                    {% endif %}
+
+
+{% endblock %}

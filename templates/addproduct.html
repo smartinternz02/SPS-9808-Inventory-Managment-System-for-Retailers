@@ -1,0 +1,49 @@
+{% extends "layouts.html" %}
+{% block content %}
+
+<div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4 offset-lg-3 div-wrapper d-block justify-content-center align-items-center">
+        	<div class="panel panel-default">
+			 			<div class="panel-body">
+							<form role="form" method="POST" >
+								{{ form.hidden_tag() }}
+    {% for mess in get_flashed_messages()  %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{mess}}
+        </div>
+      {% endfor %}
+    {% for field, errors in form.errors.items() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ ', '.join(errors) }}
+    </div>
+{% endfor %}
+                                <div class="form-group">
+<!--                                    <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="product">-->
+                                {{form.item_name(class="form-control input-sm", placeholder="Product Name")}}
+								</div>
+
+			    			<div class="form-group">
+<!--			    				<input type="text" name="quantity" id="quantity" class="form-control input-sm" placeholder="Quantity">-->
+			    			{{form.item_price(class="form-control input-sm", placeholder="Price")}}
+							</div>
+                                <div class="form-group">
+<!--			    				<input type="number" name="price" id="price" class="form-control input-sm" placeholder="Price">-->
+			    			{{form.item_qty(class="form-control input-sm", placeholder="Quantity")}}
+								</div>
+			    			{{ form.submit(class="btn btn-info btn-block") }}
+			    		</form>
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
+{% endblock %}
+<!--<div class="col-10 offset-1 col-lg-8 offset-lg-2 div-wrapper d-flex justify-content-center align-items-center">-->
+

@@ -1,0 +1,90 @@
+{% extends "layouts.html" %}
+{% block content %}
+
+<div class="search-table mx-4 ">
+    {% for mess in get_flashed_messages()  %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{mess}}
+        </div>
+      {% endfor %}
+{% if message  %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{message}}
+        </div>
+      {% endif %}
+<!--    <input type="text" class="search rounded mt-3 p-2" placeholder="Search..">-->
+<!--  <input type="text" class="st-default-search-input" style="width: 300px; height: 150px" />-->
+      <button class="btn btn-secondary" style=" background-color:#1B62D3;" type="button">
+        <i class="fa fa-search"></i>
+      </button>
+  <a href="{{ url_for('addcustomer') }}" type="button" class="btn btn-primary btn-ls mr-5 text-right" >Add New Customer</a>
+
+</div>
+<!--<div class="text-right mr-4">-->
+<!--    </div>-->
+<br>
+    <table class="table table-bordered table-striped ">
+      <thead>
+        <tr>
+        <th scope="col">Customer Id</th>
+         <th scope="col">First Name</th>
+         <th scope="col">Last Name</th>
+         <th scope="col">Email</th>
+         <th scope="col">Address</th>
+         <th scope="col">Added On</th>
+         <th scope="col">Invoice</th>
+         <th scope="col">Action</th>
+        </tr>
+      </thead>
+
+  <tbody>
+    {% for customer in view_customers%}
+     <tr>
+     <td>{{ customer.id }}</td>
+     <td>{{ customer.firstname }}</td>
+     <td>{{ customer.lastname }}</td>
+      <td>{{ customer.email }}</td>
+      <td>{{ customer.address}}</td>
+      <td>{{ customer.created_at}}</td>
+      <td><a href="/createinvoice/{{customer.id}}"><button class="btn btn-primary btn-sm">Create Bill</button></a></td>
+      <td>
+         <a href="/updatecustomer/{{customer.id}}"><button class="btn btn-warning btn-sm">Edit</button></a>
+
+         <a href="/deletecustomer/{{customer.id}}"><button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Customer')">Delete</button></a>
+      </td>
+
+    </tr>
+  {% else %}
+
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+  Nothing to Show here!!! To add new Customer<a href="{{ url_for('addcustomer') }}" class="btn stretched-link">Click here</a>
+   </div>
+   {% endfor %}
+
+  </tbody>
+</table>
+<!--<nav aria-label="Page navigation example">-->
+<!--  <ul class="pagination justify-content-end">-->
+<!--    <li class="page-item disabled">-->
+<!--      <a class="page-link" href="#" tabindex="-1">Previous</a>-->
+<!--    </li>-->
+<!--    <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--    <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--    <li class="page-item">-->
+<!--      <a class="page-link" href="#">Next</a>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</nav>-->
+
+
+{% endblock %}

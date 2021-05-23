@@ -1,0 +1,51 @@
+{% extends "layouts.html" %}
+{% block content %}
+
+<div class="search-table mx-4 ">
+  {% for mess in get_flashed_messages()  %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{mess}}
+        </div>
+      {% endfor %}
+{% if message  %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{message}}
+        </div>
+      {% endif %}
+</div>
+<br>
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">Customer Email</th>
+                              <th scope="col">Action</th>
+
+                            </tr>
+                          </thead>
+                      <tbody>
+                        {% for bill in view_customers%}
+                        <tr>
+                          <td>{{ bill.email }}</td>
+                           <td>
+                             <a href="/createinvoice/{{bill.id}}" type="button" class="btn btn-primary btn-sm" >Create Invoice</a>
+                            <a href="/viewbill/{{bill.id}}"><button class="btn btn-primary btn-sm" >View Invoice</button></a>
+                          </td>
+                      </tr>
+                      {% else %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+                             <span aria-hidden="true">&times;</span>
+                         </button>
+                        Nothing to Show here!!! Click on Create New Bill to create new bill<a href="{{ url_for('customers') }}" class="btn stretched-link">Click here</a>
+                     </div>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+
+{% endblock %}
