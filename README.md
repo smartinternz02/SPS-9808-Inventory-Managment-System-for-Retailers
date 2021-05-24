@@ -11,3 +11,4 @@ https://myinventoryapp.apps.pcfdev.in/
 
 App Demonstration Video Link:
 https://drive.google.com/file/d/15zKF9PuNu9-vDNggHsHTFQ4oOWN9eSlD/view?usp=sharing
+(To keep the video short some minor features of the applications have been skipped)
